@@ -19,7 +19,7 @@ func StartGrpcUserServer() {
 		log.Fatalf("fail start tcp listener, err - %s", err.Error())
 	}
 	server := grpc.NewServer()
-	reflection.Register(server)
+	reflection.Register(server) // необходимо чтобы клиенты могли получать метаданные о сервере
 	grpc_user_v1.RegisterUserV1Server(server, &GrpcUserV1Server{})
 	log.Printf("grpc server listen at: %s", listener.Addr())
 	if err := server.Serve(listener); err != nil {
