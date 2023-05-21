@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package user_v1;
+
+option go_package = "grpc-ed/pkg/grpc/user_v1;user_v1";
+
+service UserV1 {
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc InputStream(stream GetRequest) returns (GetResponse);
+  rpc OutputStream(GetRequest) returns (stream GetResponse);
+  rpc BidirectionalStream(stream GetRequest) returns (stream GetResponse);
+}
+
+message GetRequest {
+  int64 id = 1;
+}
+
+message GetResponse {
+  UserInfo info = 1;
+}
+
+message UserInfo {
+  int64 id = 1;
+  string name = 2;
+}
